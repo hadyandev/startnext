@@ -15,8 +15,22 @@ function Pokemon({pokemon}){
     )
 }
 
-export async function getStaticProps(){
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+export async function getStaticPaths(){
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`)
+    const pokemon = await res.json()
+
+    let paths = pokemon.results.map(p => {
+        return `/pokemon/${p.name}`
+    })
+
+    return {
+        paths,
+        fallback: false
+    }
+}
+
+export async function getStaticProps({ params }){
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.pokemon}`)
     const pokemon = await res.json()
 
     return{
