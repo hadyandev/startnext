@@ -1,9 +1,17 @@
+import Head from 'next/head'
+
 function Pokemon({pokemon}){
     return (
-        <div>
-            Welcome, {pokemon?.name}!
-            <img src={pokemon?.sprites.front_default} alt={pokemon?.name}/>
-        </div>
+        <>
+            <head>
+                <title>Pokemon: {pokemon?.name}</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </head>
+            <div>
+                Welcome, {pokemon?.name}!
+                <img src={pokemon?.sprites.front_default} alt={pokemon?.name}/>
+            </div>
+        </>
     )
 }
 
